@@ -104,7 +104,7 @@ export function IdentifyScreen() {
   /* After the last step completes, navigate to home after a short pause. */
   useEffect(() => {
     if (activeStep < STEPS.length) return;
-    const timer = setTimeout(() => navigate('/med-info', { state: { medName, medSubtitle } }), 300);
+    const timer = setTimeout(() => navigate('/med-info', { state: { medName, medSubtitle }, replace: true }), 300);
     return () => clearTimeout(timer);
   }, [activeStep, navigate]);
 

@@ -77,12 +77,11 @@ export function HomeScreen() {
             aria-hidden
             style={{
               position: 'absolute',
-              top: -22,
-              right: -36,
-              width: 421,
-              height: 421,
+              top: -13,
+              left: -20,
+              width: 525,
+              height: 525,
               pointerEvents: 'none',
-              opacity: 0.12,
             }}
           >
             <img
@@ -275,7 +274,7 @@ export function HomeScreen() {
                 whiteSpace: 'nowrap',
               }}
             >
-              Informação educativa. Não substitui aconselhamento médico
+              Informação educativa. Não substitui aconselhamento médico.
             </p>
           </div>
         </div>

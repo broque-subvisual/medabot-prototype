@@ -283,7 +283,7 @@ const PLAVIX: MedContent = {
   ],
   banner: {
     type: 'danger',
-    text: 'Tens Doença Hepática Grave registada no perfil. O Plavix é metabolizado pelo fígado e está contraindicado em insuficiência hepática grave — risco aumentado de hemorragia.',
+    text: 'Tens Doença Hepática Grave registada no perfil. O Plavix é metabolizado pelo fígado e está contraindicado em insuficiência hepática grave, podendo aumentar o risco de hemorragia.',
   },
 };
 
@@ -302,7 +302,7 @@ const LOSEC: MedContent = {
     },
     {
       title: 'Atenção antes de tomar',
-      body: 'Se tomas clopidogrel (Plavix), informa o médico — o omeprazol pode reduzir a eficácia desse medicamento. O uso prolongado pode afetar a absorção de magnésio, cálcio e vitamina B12.',
+      body: 'Se tomas clopidogrel (Plavix), informa o médico porque o omeprazol pode reduzir a eficácia desse medicamento. O uso prolongado pode afetar a absorção de magnésio, cálcio e vitamina B12.',
     },
   ],
   chips: {
@@ -324,7 +324,7 @@ const LOSEC: MedContent = {
   },
   freeAnswers: [
     'O Losec é mais eficaz quando tomado 30 minutos antes da primeira refeição do dia, em jejum.',
-    'Se também toma Plavix (clopidogrel), informe o médico — pode ser necessário trocar para pantoprazol.',
+    'Se também toma Plavix (clopidogrel), informe o médico pois pode ser necessário trocar para pantoprazol.',
     'Não interrompa o tratamento abruptamente sem consultar o médico, especialmente em tratamentos prolongados.',
     'O uso prolongado de Losec deve ser reavaliado periodicamente. Peça ao médico para reavaliar a necessidade.',
     'Se toma Losec há mais de 1 ano, o médico pode recomendar análises de magnésio e vitamina B12.',
@@ -380,7 +380,7 @@ const CLAVAMOX: MedContent = {
     'A interrupção precoce do tratamento pode levar a resistência bacteriana e recaída da infeção.',
     'Tome o Clavamox no início das refeições para melhor absorção e menor risco de desconforto gástrico.',
     'Se vomitar dentro de 30 minutos após tomar, pode repetir a dose. Caso contrário, aguarde a próxima toma.',
-    'Mantenha a suspensão oral no frigorífico após preparação. Tem validade limitada — verifique o prazo.',
+    'Mantenha a suspensão oral no frigorífico após preparação. Tem validade limitada, por isso verifique o prazo.',
     'O consumo de álcool não é recomendado durante o tratamento com antibióticos.',
     'Se desenvolver diarreia intensa ou persistente, contacte o médico. Pode ser necessário ajustar o tratamento.',
     'Em caso de sinais de infeção fúngica (manchas brancas na boca), informe o médico.',
@@ -389,7 +389,7 @@ const CLAVAMOX: MedContent = {
   ],
   banner: {
     type: 'danger',
-    text: 'Tens alergia registada à penicilina. O Clavamox contém amoxicilina (penicilina) — risco de reação alérgica grave.',
+    text: 'Tens alergia registada à penicilina. O Clavamox contém amoxicilina, que pertence à família das penicilinas, e pode causar reação alérgica grave.',
   },
 };
 
@@ -414,7 +414,7 @@ const COZAAR: MedContent = {
   chips: {
     'Interações': {
       question: 'Quais as interações que devo ter em conta?',
-      answer: 'O Cozaar pode interagir com o Atenolol que já tomas — ambos baixam a tensão, pelo que a combinação requer monitorização cuidadosa para evitar hipotensão.\nTambém interage com anti-inflamatórios (ibuprofeno), suplementos de potássio e diuréticos poupadores de potássio. A Sinvastatina não apresenta interação significativa.',
+      answer: 'O Cozaar pode interagir com o Atenolol que já tomas, pois ambos baixam a tensão, pelo que a combinação requer monitorização cuidadosa para evitar hipotensão.\nTambém interage com anti-inflamatórios (ibuprofeno), suplementos de potássio e diuréticos poupadores de potássio. A Sinvastatina não apresenta interação significativa.',
       thinkTime: 2600,
     },
     'Como tomar': {
@@ -495,7 +495,8 @@ export function MedInfoScreen() {
   const state = location.state as LocationState | null;
   const med = getMedContent(state?.medName);
 
-  const { addRecentMed } = useOnboarding();
+  const { addRecentMed, data: profileData } = useOnboarding();
+  const hasProfile = !!profileData.name;
   const [showText, setShowText] = useState(!!state?.voiceConversation?.length);
 
   /* Register this medication as recently viewed */
@@ -519,8 +520,8 @@ export function MedInfoScreen() {
   const isDanger = med.banner.type === 'danger';
   const bannerBg = isDanger ? 'var(--color-danger-bg, #fef2f2)' : 'var(--color-warning-bg)';
   const bannerColor = isDanger ? 'var(--color-danger-text, #991b1b)' : 'var(--color-warning-text)';
-  const [showDangerModal, setShowDangerModal] = useState(isDanger);
-  const [showBanner, setShowBanner] = useState(true);
+  const [showDangerModal, setShowDangerModal] = useState(hasProfile && isDanger);
+  const [showBanner, setShowBanner] = useState(hasProfile);
   const [voicePhase, setVoicePhase] = useState<VoicePhase | null>(null);
   const [voiceTranscript, setVoiceTranscript] = useState('');
   const [voiceResponse, setVoiceResponse] = useState('');
@@ -695,7 +696,7 @@ export function MedInfoScreen() {
         >
           <button
             type="button"
-            onClick={() => navigate('/home')}
+            onClick={() => navigate(hasProfile ? -1 : '/guest')}
             aria-label="Voltar"
             style={{
               width: 44,

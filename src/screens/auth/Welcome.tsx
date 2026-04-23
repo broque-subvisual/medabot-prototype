@@ -57,9 +57,9 @@ export function WelcomeScreen({ children }: WelcomeScreenProps = {}) {
             aria-hidden
             style={{
               position: 'absolute',
-              top: 228,
-              bottom: -32,
-              left: 'calc(50% + 5px)',
+              top: 53,
+              bottom: -20,
+              left: 'calc(50% - 41.5px)',
               aspectRatio: '1 / 1',
               transform: 'translateX(-50%) rotate(90deg)',
               transformOrigin: 'center',

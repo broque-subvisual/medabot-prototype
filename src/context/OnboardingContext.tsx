@@ -211,7 +211,7 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
       return [med, ...filtered];
     });
   const seedRecentMeds = (meds: RecentMed[]) =>
-    setRecentMeds((prev) => (prev.length === 0 ? meds : prev));
+    setRecentMeds(meds);
   return (
     <OnboardingCtx.Provider value={{ data, update, shelveAndReset, startNewProfile, cancelNewProfile, savedProfiles, loadProfile, cameraPermitted, grantCamera, recentMeds, addRecentMed, seedRecentMeds, avatarSrc, setAvatarSrc }}>
       {children}

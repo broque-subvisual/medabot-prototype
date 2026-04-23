@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StatusBar } from '@/components/chrome/StatusBar';
 import { useOnboarding } from '@/context/OnboardingContext';
@@ -17,7 +18,11 @@ interface GuestHomeScreenProps {
 
 export function GuestHomeScreen({ children }: GuestHomeScreenProps = {}) {
   const navigate = useNavigate();
-  const { cameraPermitted } = useOnboarding();
+  const { cameraPermitted, update } = useOnboarding();
+
+  useEffect(() => {
+    update({ name: '', age: '', weight: '', height: '', sex: 'M', allergies: [], conditions: [], meds: [], alcohol: '', tobacco: '', activity: '', supplements: '' });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div
@@ -44,19 +49,18 @@ export function GuestHomeScreen({ children }: GuestHomeScreenProps = {}) {
             boxShadow: '0px 16px 32px 0px rgba(0,0,0,0.12)',
           }}
         >
-          {/* Pill watermark — rotated 90°, centered */}
+          {/* Pill watermark */}
           <div
             aria-hidden
             style={{
               position: 'absolute',
-              top: 183,
-              bottom: -85,
-              left: 'calc(50% + 9px)',
+              top: 121,
+              bottom: -105,
+              left: 'calc(50% - 35.5px)',
               aspectRatio: '1 / 1',
               transform: 'translateX(-50%) rotate(90deg)',
               transformOrigin: 'center',
               pointerEvents: 'none',
-              opacity: 0.08,
             }}
           >
             <img
@@ -226,10 +230,11 @@ export function GuestHomeScreen({ children }: GuestHomeScreenProps = {}) {
               style={{
                 display: 'flex',
                 gap: 4,
-                alignItems: 'flex-start',
+                alignItems: 'center',
                 padding: 'var(--space-xs) var(--space-md)',
                 borderRadius: 'var(--radius-xsm)',
-                boxShadow: '0 0 30px 0 rgba(0,0,0,0.05)',
+                background: 'rgba(255,255,255,0.15)',
+                width: '100%',
               }}
             >
               <div
@@ -261,7 +266,7 @@ export function GuestHomeScreen({ children }: GuestHomeScreenProps = {}) {
                   color: 'white',
                 }}
               >
-                Informação educativa. Não substitui aconselhamento médico
+                Informação educativa. Não substitui aconselhamento médico.
               </p>
             </div>
           </div>

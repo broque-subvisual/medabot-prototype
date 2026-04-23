@@ -45,9 +45,9 @@ export function BlueFrame({ children, showBack = true, title, onBack }: BlueFram
             aria-hidden
             style={{
               position: 'absolute',
-              top: 228,
-              bottom: -32,
-              left: 'calc(50% + 5px)',
+              top: 121,
+              bottom: -105,
+              left: 'calc(50% - 35.5px)',
               aspectRatio: '1 / 1',
               transform: 'translateX(-50%) rotate(90deg)',
               transformOrigin: 'center',

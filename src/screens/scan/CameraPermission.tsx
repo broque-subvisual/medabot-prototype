@@ -41,9 +41,9 @@ export function CameraPermissionScreen() {
             aria-hidden
             style={{
               position: 'absolute',
-              top: 183,
-              bottom: -77,
-              left: 'calc(50% + 5px)',
+              top: 121,
+              bottom: -105,
+              left: 'calc(50% - 35.5px)',
               aspectRatio: '1 / 1',
               transform: 'translateX(-50%) rotate(90deg)',
               transformOrigin: 'center',

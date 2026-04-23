@@ -36,6 +36,9 @@ const MED_DATABASE: Med[] = [
   { name: 'Metformina 850mg', subtitle: 'Metformina · Comprimido' },
   { name: 'Pantoprazol 20mg', subtitle: 'Pantoprazol · Comprimido' },
   { name: 'Sinvastatina 20mg', subtitle: 'Sinvastatina · Comprimido' },
+  { name: 'Plavix 75mg', subtitle: 'Clopidogrel · Comprimido' },
+  { name: 'Losec 20mg', subtitle: 'Omeprazol · Capsula' },
+  { name: 'Cozaar 50mg', subtitle: 'Losartan · Comprimido' },
 ];
 
 /**
@@ -204,6 +207,43 @@ export function SearchScreen() {
             overflow: 'auto',
           }}
         >
+          {!showPopular && items.length === 0 && (
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 'var(--space-xs)',
+                padding: 'var(--space-2xl) var(--space-md)',
+              }}
+            >
+              <p
+                style={{
+                  margin: 0,
+                  fontFamily: 'var(--font-family)',
+                  fontWeight: 'var(--font-weight-semibold)',
+                  fontSize: 'var(--font-size-body-l)',
+                  lineHeight: 'var(--line-height-body-l)',
+                  color: 'var(--color-text-primary)',
+                }}
+              >
+                Nenhum resultado encontrado.
+              </p>
+              <p
+                style={{
+                  margin: 0,
+                  fontFamily: 'var(--font-family)',
+                  fontWeight: 'var(--font-weight-regular)',
+                  fontSize: 'var(--font-size-body-m)',
+                  lineHeight: 'var(--line-height-body-m)',
+                  color: 'var(--color-text-tertiary)',
+                  textAlign: 'center',
+                }}
+              >
+                Verifique o nome ou tente outra pesquisa.
+              </p>
+            </div>
+          )}
           {items.map((item) => (
             <div key={item.name}>
                 <button
